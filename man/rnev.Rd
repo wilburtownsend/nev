@@ -9,11 +9,11 @@ rnev(
   sigma,
   nests,
   tol = 0.001,
-  lower_int = -50,
-  upper_int = 50,
-  lower_eval = -5,
-  upper_eval = 10,
-  resolution = 2^15
+  lower_int = NULL,
+  upper_int = NULL,
+  lower_eval = -10,
+  upper_eval = 30,
+  resolution = 2^14
 )
 }
 \arguments{
@@ -25,15 +25,15 @@ rnev(
 
 \item{tol}{the tolerance on the requirement that the approximate pdf be real-valued, non-negative, and equal to zero at its boundary;}
 
-\item{lower_int}{an argument passed to fourierin;}
+\item{lower_int}{an argument passed to fourierin (default depends on sigma);}
 
-\item{upper_int}{an argument passed to fourierin;}
+\item{upper_int}{an argument passed to fourierin (default depends on sigma);}
 
-\item{lower_eval}{an argument passed to fourierin;}
+\item{lower_eval}{an argument passed to fourierin (default = -10);}
 
-\item{upper_eval}{an argument passed to fourierin;}
+\item{upper_eval}{an argument passed to fourierin (default = 30);}
 
-\item{resolution}{an argument passed to fourierin.}
+\item{resolution}{an argument passed to fourierin (default = 2^14).}
 }
 \value{
 An N-by-length(nests) matrix, with each row being a draw from the nested extreme value distribution.

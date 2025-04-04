@@ -8,11 +8,11 @@
 #' @param sigma the parameter that measures within-nest correlation;
 #' @param nests an integer-valued vector indicating the nest of each alternative;
 #' @param tol the tolerance on the requirement that the approximate pdf be real-valued, non-negative, and equal to zero at its boundary;
-#' @param lower_int an argument passed to fourierin;
-#' @param upper_int an argument passed to fourierin;
-#' @param lower_eval an argument passed to fourierin;
-#' @param upper_eval an argument passed to fourierin;
-#' @param resolution an argument passed to fourierin.
+#' @param lower_int an argument passed to fourierin (default depends on sigma);
+#' @param upper_int an argument passed to fourierin (default depends on sigma);
+#' @param lower_eval an argument passed to fourierin (default = -10);
+#' @param upper_eval an argument passed to fourierin (default = 30);
+#' @param resolution an argument passed to fourierin (default = 2^14).
 #' @return An N-by-length(nests) matrix, with each row being a draw from the nested extreme value distribution.
 #' @export
 rnev = function(N, sigma, nests,
