@@ -1,0 +1,14 @@
+Package: nev
+Title: Draw nested extreme value random variables
+Version: 0.0.0.9000
+Authors@R: 
+    person("Wilbur", "Townsend", , "wilbur.townsend@gmail.com", role = c("aut", "cre"))
+Description: Draw nested extreme value random variables, which are the variables that appear in the latent variable formulation of the nested logit model.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    fourierin (>= 0.2.5),
+    pracma (>= 2.4.4),
+    extraDistr (>= 1.10.0)
