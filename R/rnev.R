@@ -19,7 +19,7 @@ rnev = function(N, sigma, nests,
                 tol=1e-3,
                 lower_int = NULL, upper_int = NULL,
                 lower_eval = -10, upper_eval = 30,
-                resolution=2^14
+                resolution=2^15
                 ) {
     # If lower_int and upper_int are not provided, set equal to \pm 100*sigma
     if (is.null(lower_int)) lower_int = -400*min(sigma, 0.1)
