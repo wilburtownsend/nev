@@ -13,15 +13,15 @@ rnev(
   upper_int = NULL,
   lower_eval = -10,
   upper_eval = 30,
-  resolution = 2^14
+  resolution = 2^15
 )
 }
 \arguments{
 \item{N}{the number of vectors;}
 
-\item{sigma}{the parameter that measures within-nest correlation;}
+\item{sigma}{the parameter that measures within-nest correlation, expressed either as a length-num_nests vector or as a scalar (in which case sigma is assumed constant across nests);}
 
-\item{nests}{an integer-valued vector indicating the nest of each alternative;}
+\item{nests}{a vector of positive integers, indicating the nest of each alternative;}
 
 \item{tol}{the tolerance on the requirement that the approximate pdf be real-valued, non-negative, and equal to zero at its boundary;}
 
