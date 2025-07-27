@@ -11,14 +11,14 @@
 #' @param lower_int an argument passed to fourierin (default depends on sigma);
 #' @param upper_int an argument passed to fourierin (default depends on sigma);
 #' @param lower_eval an argument passed to fourierin (default = -10);
-#' @param upper_eval an argument passed to fourierin (default = 30);
-#' @param resolution an argument passed to fourierin (default = 2^14).
+#' @param upper_eval an argument passed to fourierin (default depends on sigma);
+#' @param resolution an argument passed to fourierin (default = 2^15).
 #' @return An N-by-length(nests) matrix, with each row being a draw from the nested extreme value distribution.
 #' @export
 rnev = function(N, sigma, nests,
                 tol=1e-3,
                 lower_int = NULL, upper_int = NULL,
-                lower_eval = -10, upper_eval = 30,
+                lower_eval = -10, upper_eval = NULL,
                 resolution=2^15
                 ) {
     # Check nests is a vector of integers.
@@ -44,6 +44,10 @@ rnev = function(N, sigma, nests,
         # If lower_int and upper_int are not provided, set equal to \pm 100*sigma.
         if (is.null(lower_int)) lower_int = -400*min(sigma, 0.1)
         if (is.null(upper_int)) upper_int =  400*min(sigma, 0.1)
+        # If upper_eval is not provided, set equal to max(30, 10/sigma).
+        # The wide limit of evaluation for small sigma values is necessary to get the 
+        # proper within-nest covariance.
+        if (is.null(upper_eval)) upper_eval = max(30, 10/sigma)
         # Define the characteristic function.
         characteristic = function(z) exp(log(pracma::gammaz(1 - 1i*z/sigma)) - log(pracma::gammaz(1 - 1i*(1-sigma)*z/sigma)))
         # Integrate to find the PDF.
@@ -56,16 +60,20 @@ rnev = function(N, sigma, nests,
          # imaginary values are small
         if (max(abs(Im(out$values))) > tol) stop("Imaginary values of the pdf have magnitude greater than `tol`")
          # pdf is almost non-negative
-        if (min(Re(out$values) < tol)) stop("The pdf has values < -`tol'")
+        if (min(Re(out$values) < -tol)) stop("The pdf has values < -`tol'")
          # pdf end points are zero
         if (Re(out$values[1]) > tol) stop("The pdf has value > `tol' on the start of its domain")
         if (Re(out$values[resolution]) > tol) stop("The pdf has value > `tol' on the end of its domain")
         # Censor negative and imaginary parts out of the pdf.
         out$values_censored = sapply(out$values, function(v) max(0, Re(v)))
+        # Make the pdf strictly positive, which is necessary for inverse transform sampling.
+        stopifnot(any(out$values_censored > 0))
+        min_positive_pdf = min(out$values_censored[out$values_censored > 0])
+        out$values_censored[out$values_censored == 0] = min_positive_pdf / 1000
         # Integrate over the pdf to find the CDF.
         out$cdf = cumsum(out$values_censored)
         out$cdf = out$cdf/out$cdf[resolution]
-        # Return the pdf.
+        # Return the cdf.
         return(list(x=out$w, P=out$cdf))
     }
 
