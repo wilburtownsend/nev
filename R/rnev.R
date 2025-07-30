@@ -32,6 +32,11 @@ rnev = function(N, sigma, nests,
     if (!is.vector(nests) | !is.numeric(sigma) | !(length(sigma) %in% c(1, num_nests))) {
         stop("`sigma` must be a scalar or a length-num_nests vector")
     }
+    # If only one sigma is provided, then we can xwalk nests to a sequential integer to avoid redundant draws.
+    if (length(sigma) == 1) {
+        nests = match(nests, unique(nests))
+        num_nests = max(nests)
+    }    
     # Check all sigma is in (0,1].
     if ((min(sigma) <= 0) | (max(sigma) > 1)) {
         stop("`sigma` must be in (0, 1]")
