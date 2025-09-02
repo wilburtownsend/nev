@@ -14,6 +14,9 @@
 #' @param upper_eval an argument passed to fourierin (default depends on sigma);
 #' @param resolution an argument passed to fourierin (default = 2^15).
 #' @return An N-by-length(nests) matrix, with each row being a draw from the nested extreme value distribution.
+#' @examples
+#' rnev(10, 0.5, c(1,1,2,3))
+#'
 #' @export
 rnev = function(N, sigma, nests,
                 tol=1e-3,

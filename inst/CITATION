@@ -1,0 +1,8 @@
+## R package reference generated from DESCRIPTION metadata
+citation(auto = meta)
+
+bibentry(bibtype = "Article",
+         title = "A Novel Algorithm for Drawing Nested Extreme Value Random Variables",
+         author = person("Wilbur", "Townsend"),
+         year = "forthcoming",
+         journal = "Journal of Choice Modelling")

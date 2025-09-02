@@ -12,7 +12,7 @@ rnev(
   lower_int = NULL,
   upper_int = NULL,
   lower_eval = -10,
-  upper_eval = 30,
+  upper_eval = NULL,
   resolution = 2^15
 )
 }
@@ -31,13 +31,17 @@ rnev(
 
 \item{lower_eval}{an argument passed to fourierin (default = -10);}
 
-\item{upper_eval}{an argument passed to fourierin (default = 30);}
+\item{upper_eval}{an argument passed to fourierin (default depends on sigma);}
 
-\item{resolution}{an argument passed to fourierin (default = 2^14).}
+\item{resolution}{an argument passed to fourierin (default = 2^15).}
 }
 \value{
 An N-by-length(nests) matrix, with each row being a draw from the nested extreme value distribution.
 }
 \description{
 \code{rnev} draws nested extreme value random variables.
+}
+\examples{
+rnev(10, 0.5, c(1,1,2,3))
+
 }

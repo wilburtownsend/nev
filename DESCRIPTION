@@ -1,8 +1,7 @@
 Package: nev
-Title: Draw nested extreme value random variables
-Version: 0.0.0.9000
-Authors@R: 
-    person("Wilbur", "Townsend", , "wilbur.townsend@gmail.com", role = c("aut", "cre"))
+Title: Draw Nested Extreme Value Random Variables
+Version: 1.0.0.0
+Authors@R: person("Wilbur", "Townsend", email = "wilbur.townsend@gmail.com", role = c("aut", "cre"))
 Description: Draw nested extreme value random variables, which are the variables that appear in the latent variable formulation of the nested logit model.
 License: GPL (>= 3)
 Encoding: UTF-8
